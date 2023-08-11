@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +9,7 @@ using Moq;
 using NuGet.Versioning;
 using Xunit;
 
-namespace BaGet.Web.Tests
+namespace BaGet.Web.Tests.Pages
 {
     public class PackageModelFacts
     {
@@ -236,7 +236,9 @@ namespace BaGet.Web.Tests
             Assert.Equal(".NET Framework 4.8", _target.DependencyGroups[1].Name);
 
             Assert.Equal(2, _target.DependencyGroups[0].Dependencies.Count);
+#pragma warning disable xUnit2013 // Do not use equality check to check for collection size.
             Assert.Equal(1, _target.DependencyGroups[1].Dependencies.Count);
+#pragma warning restore xUnit2013 // Do not use equality check to check for collection size.
 
             Assert.Equal("Dependency1", _target.DependencyGroups[0].Dependencies[0].PackageId);
             Assert.Equal("(>= 1.0.0)", _target.DependencyGroups[0].Dependencies[0].VersionSpec);

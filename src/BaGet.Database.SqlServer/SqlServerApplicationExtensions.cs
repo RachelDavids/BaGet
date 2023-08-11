@@ -15,7 +15,10 @@ namespace BaGet
             {
                 var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
 
-                options.UseSqlServer(databaseOptions.Value.ConnectionString);
+                options.UseSqlServer(databaseOptions.Value.ConnectionString,
+                                     o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+                       //.ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))
+                       ;
             });
 
             return app;

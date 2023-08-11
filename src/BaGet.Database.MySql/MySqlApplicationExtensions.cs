@@ -14,8 +14,8 @@ namespace BaGet
             app.Services.AddBaGetDbContextProvider<MySqlContext>("MySql", (provider, options) =>
             {
                 var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
-
-                options.UseMySql(databaseOptions.Value.ConnectionString);
+                var connectionString = databaseOptions.Value.ConnectionString;
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
 
             return app;
