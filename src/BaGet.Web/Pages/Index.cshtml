@@ -102,6 +102,25 @@
 }
 else
 {
+    var showPreviousLink = Model.PageIndex > 1;
+    var showNextLink = Model.Packages.Count >= IndexModel.ResultsPerPage;
+
+    if (showPreviousLink || showNextLink)
+    {
+    <nav aria-label="Search page navigation">
+        <ul class="pager">
+            @if (showPreviousLink)
+            {
+                <li><a href="@SearchLink(page: Model.PageIndex - 1)">Previous</a></li>
+            }
+
+            @if (showNextLink)
+            {
+                <li><a href="@SearchLink(page: Model.PageIndex + 1)">Next</a></li>
+            }
+        </ul>
+    </nav>
+    }
     @foreach (var package in Model.Packages)
     {
         <div class="row search-result">
@@ -150,9 +169,6 @@ else
             </div>
         </div>
     }
-
-    var showPreviousLink = Model.PageIndex > 1;
-    var showNextLink = Model.Packages.Count >= IndexModel.ResultsPerPage;
 
     if (showPreviousLink || showNextLink)
     {

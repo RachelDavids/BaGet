@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
@@ -41,7 +41,10 @@ namespace BaGet.Web
 
         public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
             var packageType = PackageType == "any" ? null : PackageType;
             var framework = Framework == "any" ? null : Framework;
